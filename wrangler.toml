@@ -1,5 +1,5 @@
 name = "remix-cloudflare-workers"
-main = "./build/index.js"
+main = "worker/index.ts"
 compatibility_date = "2022-04-05"
 
 account_id = ""
@@ -8,5 +8,5 @@ workers_dev = true
 [site]
 bucket = "./public"
 
-[build]
-command = "npm run build"
+[env.dev]
+vars = {SESSION_SECRET = "should-be-secure-in-prod"}
