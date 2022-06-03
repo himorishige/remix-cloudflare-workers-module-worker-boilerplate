@@ -9,9 +9,9 @@
     "build": "remix build",
     "deploy": "npm run build && wrangler publish",
     "dev:remix": "remix watch",
-    "dev:miniflare": "cross-env NODE_ENV=development miniflare ./build/index.js --watch",
+    "dev:miniflare": "cross-env NODE_ENV=development wrangler dev --local",
     "dev": "remix build && run-p dev:*",
-    "start": "cross-env NODE_ENV=production miniflare ./build/index.js"
+    "start": "cross-env NODE_ENV=production wrangler dev"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.2.0",
