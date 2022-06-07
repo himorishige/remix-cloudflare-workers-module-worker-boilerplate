@@ -1,4 +1,9 @@
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+import {
+  getAssetFromKV,
+  MethodNotAllowedError,
+  NotFoundError,
+} from '@cloudflare/kv-asset-handler';
+import type { LoadContext } from '@remix-run/cloudflare';
 import { createRequestHandler } from '@remix-run/cloudflare';
 import manifestJSON from '__STATIC_CONTENT_MANIFEST';
 
@@ -35,11 +40,11 @@ export default {
         },
       );
     } catch (error) {
-      // if (error instanceof MethodNotAllowedError) {
-      //   return new Response("Method not allowed", { status: 405 });
-      // } else if (!(error instanceof NotFoundError)) {
-      //   return new Response("An unexpected error occurred", { status: 500 });
-      // }
+      if (error instanceof MethodNotAllowedError) {
+        return new Response('Method not allowed', { status: 405 });
+      } else if (!(error instanceof NotFoundError)) {
+        return new Response('An unexpected error occurred', { status: 500 });
+      }
     }
 
     try {
