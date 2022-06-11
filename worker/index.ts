@@ -18,7 +18,7 @@ export default {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<Response> {
-    if (request.method === 'GET') {
+    if (request.method === 'GET' || request.method === 'HEAD') {
       try {
         const url = new URL(request.url);
         const ttl = url.pathname.startsWith('/build/')
