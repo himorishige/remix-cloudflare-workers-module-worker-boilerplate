@@ -18,32 +18,34 @@ export default {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<Response> {
-    try {
-      const url = new URL(request.url);
-      const ttl = url.pathname.startsWith('/build/')
-        ? 60 * 60 * 24 * 365 // 1 year
-        : 60 * 5; // 5 minutes
-      return await getAssetFromKV(
-        {
-          request,
-          waitUntil(promise) {
-            return ctx.waitUntil(promise);
+    if (request.method === 'GET') {
+      try {
+        const url = new URL(request.url);
+        const ttl = url.pathname.startsWith('/build/')
+          ? 60 * 60 * 24 * 365 // 1 year
+          : 60 * 5; // 5 minutes
+        return await getAssetFromKV(
+          {
+            request,
+            waitUntil(promise) {
+              return ctx.waitUntil(promise);
+            },
           },
-        },
-        {
-          ASSET_NAMESPACE: env.__STATIC_CONTENT,
-          ASSET_MANIFEST: assetManifest,
-          cacheControl: {
-            browserTTL: ttl,
-            edgeTTL: ttl,
+          {
+            ASSET_NAMESPACE: env.__STATIC_CONTENT,
+            ASSET_MANIFEST: assetManifest,
+            cacheControl: {
+              browserTTL: ttl,
+              edgeTTL: ttl,
+            },
           },
-        },
-      );
-    } catch (error) {
-      if (error instanceof MethodNotAllowedError) {
-        return new Response('Method not allowed', { status: 405 });
-      } else if (!(error instanceof NotFoundError)) {
-        return new Response('An unexpected error occurred', { status: 500 });
+        );
+      } catch (error) {
+        if (error instanceof MethodNotAllowedError) {
+          return new Response('Method not allowed', { status: 405 });
+        } else if (!(error instanceof NotFoundError)) {
+          return new Response('An unexpected error occurred', { status: 500 });
+        }
       }
     }
 
