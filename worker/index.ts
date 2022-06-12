@@ -3,7 +3,7 @@ import {
   MethodNotAllowedError,
   NotFoundError,
 } from '@cloudflare/kv-asset-handler';
-import type { LoadContext } from '@remix-run/cloudflare';
+import type { AppLoadContext } from '@remix-run/cloudflare';
 import { createRequestHandler } from '@remix-run/cloudflare';
 import manifestJSON from '__STATIC_CONTENT_MANIFEST';
 
@@ -50,7 +50,7 @@ export default {
     }
 
     try {
-      const loadContext: LoadContext = { env };
+      const loadContext: AppLoadContext = { env };
       return await handleRemixRequest(request, loadContext);
     } catch (error) {
       console.log(error);
