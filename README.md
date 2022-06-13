@@ -1,8 +1,32 @@
-# Welcome to Remix!
+# Remix + Cloudflare Workers boilerplate (Module Worker)🚀
 
+Starter to get going with Remix and Cloudflare Workers (Module Worker).
+
+- [Remix on Cloudflare WorkersをService WorkerからModule Workerに移行する \| DevelopersIO](https://dev.classmethod.jp/articles/remix-on-cloudflare-module-workers/)
 - [Remix Docs](https://remix.run/docs)
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+
+## Getting Started
+
+### ​​Installing the Workers CLI
+
+Wrangler requires a minimum Node version of 16
+
+```bash
+npm install -g wrangler
+```
+
+or install with yarn:
+
+```bash
+yarn global add wrangler
+```
+
+Read more about [installing wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/).
 
 ## Development
+
+Create a `wrangler.toml` file for the development, referring to `wrangler.dev.toml.example`. It is useful to prepare a configuration for development since the `Secret` is not available in `wrangler dev --local` mode.
 
 You will be running two processes during development:
 

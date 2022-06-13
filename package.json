@@ -8,7 +8,7 @@
   "scripts": {
     "build": "remix build",
     "deploy": "npm run build && wrangler publish",
-    "dev:miniflare": "cross-env NODE_ENV=development wrangler dev --env dev --local",
+    "dev:miniflare": "cross-env NODE_ENV=development wrangler dev --config wrangler.dev.toml --env dev --local",
     "dev": "concurrently \"npm run dev:miniflare\" \"remix watch\""
   },
   "dependencies": {

@@ -7,3 +7,6 @@ workers_dev = true
 
 [site]
 bucket = "./public"
+
+[env.dev]
+vars = {SESSION_SECRET = "should-be-secure-in-prod"}
