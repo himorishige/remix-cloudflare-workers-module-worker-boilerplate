@@ -9,7 +9,8 @@
     "build": "remix build",
     "deploy": "npm run build && wrangler publish",
     "dev:miniflare": "cross-env NODE_ENV=development wrangler dev --config wrangler.dev.toml --env dev --local",
-    "dev": "concurrently \"npm run dev:miniflare\" \"remix watch\""
+    "dev": "concurrently \"npm run dev:miniflare\" \"remix watch\"",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.2.0",
